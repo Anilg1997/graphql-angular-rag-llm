@@ -28,4 +28,16 @@ export class AiService {
   mcpExecute(body: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/mcp/execute`, body, { headers: this.headers });
   }
+
+  getCourses(): Observable<any> {
+    return this.http.get('/api/courses');
+  }
+
+  createCourse(body: any): Observable<any> {
+    return this.http.post('/api/courses', body, { headers: this.headers });
+  }
+
+  deleteCourse(id: string): Observable<any> {
+    return this.http.delete(`/api/courses/${id}`);
+  }
 }

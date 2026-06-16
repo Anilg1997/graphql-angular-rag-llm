@@ -25,6 +25,11 @@ export class AppComponent implements OnInit {
   studentForm = { id: '', name: '', email: '', course: '' };
   studentResult = '';
 
+  // Course CRUD
+  courses: any[] = [];
+  courseForm = { id: '', title: '', description: '', instructor: '', credits: 3 };
+  courseResult = '';
+
   // AI Chat
   chatMessage = '';
   chatResponse = '';
@@ -133,6 +138,43 @@ export class AppComponent implements OnInit {
 
   editStudent(s: Student) {
     this.studentForm = { ...s };
+  }
+
+  // ===== Course CRUD =====
+  loadCourses() {
+    this.ai.getCourses().subscribe({
+      next: (res: any) => {
+        this.courses = Array.isArray(res) ? res : [];
+        this.courseResult = `Loaded ${this.courses.length} courses`;
+      },
+      error: (err: any) => {
+        this.courseResult = 'Error: ' + err.message + ' (is course-service running on port 8081?)';
+      },
+    });
+  }
+
+  createCourse() {
+    const { title, description, instructor, credits } = this.courseForm;
+    if (!title) { this.courseResult = 'Title is required'; return; }
+    this.courseResult = 'Creating...';
+    this.ai.createCourse({ title, description, instructor, credits: Number(credits) }).subscribe({
+      next: () => {
+        this.courseResult = 'Created!';
+        this.courseForm = { id: '', title: '', description: '', instructor: '', credits: 3 };
+        this.loadCourses();
+      },
+      error: (err: any) => (this.courseResult = 'Error: ' + err.message),
+    });
+  }
+
+  deleteCourse(id: string) {
+    this.ai.deleteCourse(id).subscribe({
+      next: () => {
+        this.courseResult = 'Deleted!';
+        this.loadCourses();
+      },
+      error: (err: any) => (this.courseResult = 'Error: ' + err.message),
+    });
   }
 
   // ===== AI Chat =====
