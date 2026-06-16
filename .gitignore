@@ -35,7 +35,6 @@ build/
 ### Project-specific ###
 *.log
 *.err
-backend*.txt
 screenshot-*.png
 TEST_REPORT.md
 Thumbs.db
