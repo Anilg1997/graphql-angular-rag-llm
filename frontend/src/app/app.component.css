@@ -111,15 +111,34 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 12px;
+  background: #0f0f1a;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th, td {
-  padding: 10px 12px;
+  padding: 12px 14px;
   text-align: left;
   border-bottom: 1px solid #2a2a4e;
 }
 
-th { color: #a78bfa; font-weight: 600; }
+th {
+  background: #2d1b69;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+td {
+  color: #f0f0f0;
+}
+
+tr:nth-child(even) td {
+  background: #15152a;
+}
+
+tr:hover td {
+  background: #1e1e3f;
+}
 
 pre {
   background: #0f0f1a;
