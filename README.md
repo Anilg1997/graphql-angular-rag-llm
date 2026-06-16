@@ -1,4 +1,4 @@
-# GraphQL Angular - RAG LLM Agentic AI
+# EduSphere AI
 
 A full-stack application combining **GraphQL CRUD** with **RAG (Retrieval-Augmented Generation)**, **LLM integration**, **AI Agents**, and **MCP (Model Context Protocol)** — all powered by **Ollama** (local, free LLMs).
 
